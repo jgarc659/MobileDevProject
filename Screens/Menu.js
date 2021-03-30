@@ -82,12 +82,13 @@ const Menu = props => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'black'
+        backgroundColor: 'white'
     },
     input: {
         backgroundColor: 'white',
         borderRadius: 10,
         width: '100%',
+        borderBottomWidth : 1.0,
         marginRight: 5,
         height: 50
     },
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     text: {
-        color: 'white',
+        color: 'black',
         fontWeight: 'bold'
     },
     section: {

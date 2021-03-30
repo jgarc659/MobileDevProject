@@ -16,14 +16,14 @@ const Home = props => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'black',
+        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center'
     },
     text: {
         fontSize: 30,
         fontWeight: 'bold',
-        color: 'white'
+        color: 'black'
     },
     logo: {
         width: 50,
