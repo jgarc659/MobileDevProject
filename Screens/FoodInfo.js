@@ -48,11 +48,11 @@ const FoodInfo = props => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'black',
-        color: 'white'
+        backgroundColor: 'white',
+        color: 'black'
     },
     text: {
-        color: 'white',
+        color: 'black',
         fontWeight: 'bold',
         textAlign: 'left',
         marginLeft: 15,
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         width: '80%'
     },
     name: {
-        color: 'white',
+        color: 'black',
         fontWeight: 'bold',
         fontSize: 21,
         marginBottom: 15
