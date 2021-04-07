@@ -1,4 +1,9 @@
 import React, {useState, useEffect} from 'react';
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+  } from "react-native-responsive-dimensions";
 import {StyleSheet, Text, View, Button, SafeAreaView, TouchableOpacity, SectionList, TextInput} from 'react-native';
 import items from '../MenuItems';
 
@@ -63,7 +68,18 @@ const Menu = props => {
         </TouchableOpacity>)
     ;
 
-    const renderSectionHeader = ({section}) => <Text style={styles.section}>{section.title}</Text>
+    const renderSectionHeader = ({section}) => <SectionHeader section={section}/>
+    
+    // SectionHeader component only renders if section is not empty.
+    const SectionHeader = ({section}) => {
+        if (section.data.length > 0) {
+            return <Text style={styles.section}>{section.title}</Text>
+        }
+        else {
+            return null;
+        }
+    }
+
 
     return (
         <SafeAreaView style={styles.container}>
@@ -72,7 +88,11 @@ const Menu = props => {
                 <TextInput style={styles.input} onChangeText={ (newQuery) => updateQuery(newQuery) } placeholder="What are you craving?" />
             </View>
             
-            <SectionList sections={displayedItems} renderItem={renderItem} renderSectionHeader={renderSectionHeader} />
+            <SectionList 
+                sections={displayedItems} 
+                renderItem={renderItem} 
+                renderSectionHeader={renderSectionHeader}
+            />
 
         </SafeAreaView>
     );
@@ -86,11 +106,11 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: 'white',
-        borderRadius: 10,
-        width: '100%',
+        width: responsiveWidth(90),
         borderBottomWidth : 1.0,
-        marginRight: 5,
-        height: 50
+        marginLeft: 10,
+        marginBottom: 20,
+        height: responsiveHeight(6)
     },
     row: {
         padding: 20
@@ -104,7 +124,8 @@ const styles = StyleSheet.create({
     },
     section: {
         color: 'red',
-        fontSize: 20,
+        fontSize: responsiveFontSize(3),
+        marginLeft: 7,
         fontWeight: 'bold'
     }
 });

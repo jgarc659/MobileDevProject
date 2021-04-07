@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {responsiveFontSize} from "react-native-responsive-dimensions";
 import {StyleSheet, Text, View, SafeAreaView, Image} from 'react-native';
 import items from '../MenuItems';
 
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'left',
         marginLeft: 15,
+        fontSize: responsiveFontSize(2),
         marginBottom: 5
     },
     centeredContent: {
@@ -70,7 +72,7 @@ const styles = StyleSheet.create({
     name: {
         color: 'black',
         fontWeight: 'bold',
-        fontSize: 21,
+        fontSize: responsiveFontSize(3),
         marginBottom: 15
     },
     description: {

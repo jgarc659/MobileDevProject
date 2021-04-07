@@ -1,4 +1,9 @@
 import React from 'react';
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+  } from "react-native-responsive-dimensions";
 import {StyleSheet, Text, View, Button, Image} from 'react-native';
 
 const Home = props => {
@@ -21,13 +26,13 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     text: {
-        fontSize: 30,
+        fontSize: responsiveFontSize(5),
         fontWeight: 'bold',
         color: 'black'
     },
     logo: {
-        width: 50,
-        height: 50,
+        width: responsiveWidth(40),
+        height: responsiveHeight(20),
         margin: 20,
         padding: 30
     }

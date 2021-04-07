@@ -1,4 +1,6 @@
-import React from 'react';
+import 'react-native-gesture-handler';
+import AnimatedSplash from "react-native-animated-splash-screen";
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -32,12 +34,30 @@ const RestaurantAppStack = () => {
 };
 
 const App = props => {
+  const [isLoaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    // Allow Splash screen to show for 3 seconds.
+    setTimeout((() => { setLoaded(true); }), 3000);
+    
+  }, []);
+
   return (
-    <NavigationContainer style={styles.container}>
-  
-      <RestaurantAppStack />
-  
-    </NavigationContainer>
+    <AnimatedSplash
+      translucent={true}
+      isLoaded={isLoaded}
+      logoImage={require("./assets/app-logo.png")}
+      backgroundColor={"blue"}
+      logoHeight={350}
+      logoWidth={350}
+    >
+      <NavigationContainer style={styles.container}>
+    
+        <RestaurantAppStack />
+    
+      </NavigationContainer>
+
+    </AnimatedSplash>
  );
 }
 
