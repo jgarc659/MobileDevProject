@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler';
 import AnimatedSplash from "react-native-animated-splash-screen";
+import { Asset, useAssets } from 'expo-asset';
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
@@ -35,6 +36,7 @@ const RestaurantAppStack = () => {
 
 const App = props => {
   const [isLoaded, setLoaded] = useState(false);
+  const [assets] = useAssets([require('./assets/app-logo.png')]);
 
   useEffect(() => {
     // Allow Splash screen to show for 3 seconds.

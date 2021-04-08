@@ -1,4 +1,7 @@
 import React from 'react';
+import {Video} from 'expo-av';
+import { Asset } from 'expo-asset';
+
 import {
     responsiveHeight,
     responsiveWidth,
@@ -10,6 +13,16 @@ const Home = props => {
 
     return (
         <View style={styles.container}>
+         <Video
+                source={ require('../assets/footage.mp4') }
+                rate={1.0}
+                isMuted={true}
+                resizeMode="cover"
+                shouldPlay
+                isLooping
+                style={styles.video}
+                /> 
+
             <Text style={styles.text}>Restaurant App</Text>
             <Image style={styles.logo} source={{uri: 'https://freepngimg.com/thumb/food/4-2-food-png.png'}}/>
             <Button title="LOGIN" onPress={() => props.navigation.navigate('Menu')} />
@@ -31,10 +44,14 @@ const styles = StyleSheet.create({
         color: 'black'
     },
     logo: {
-        width: responsiveWidth(40),
-        height: responsiveHeight(20),
+        width: responsiveWidth(30),
+        height: responsiveHeight(12),
         margin: 20,
         padding: 30
+    },
+    video: {
+        width: responsiveWidth(80),
+        height: responsiveHeight(25)
     }
 });
 
