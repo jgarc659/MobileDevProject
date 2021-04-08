@@ -38,8 +38,11 @@ const FoodInfo = props => {
                     <Text style = {styles.name}>{displayedItem['name']}</Text>
                 </View>
                 <View style = {styles.description}>
-                  <Text style = {styles.text}>Price: ${displayedItem['price']}</Text>
                   <Text style = {styles.text}>Calories: {displayedItem['calories']}</Text>
+                  <Text style = {styles.text}>Fat: {displayedItem['fat']} grams</Text>
+                  <Text style = {styles.text}>Carbs: {displayedItem['carbs']} grams</Text>
+                  <Text style = {styles.text}>Sugar: {displayedItem['sugar']} grams</Text>
+                  <Text style = {styles.text}>Sodium: {displayedItem['sodium']} grams</Text>
                 </View>
             </SafeAreaView>
     );
