@@ -64,7 +64,7 @@ const Menu = props => {
 
     const renderItem = ({ item }) => 
         (<TouchableOpacity style={styles.row} onPress={() => props.navigation.navigate('FoodInfo', {id: item['id']})}>
-            <Text style={styles.text}>{item['name']} - ${item['price']}</Text>
+            <Text style={styles.text}>{item['name']}</Text>
         </TouchableOpacity>)
     ;
 

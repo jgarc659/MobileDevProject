@@ -23,7 +23,7 @@ const Home = props => {
                 style={styles.video}
                 /> 
 
-            <Text style={styles.text}>Restaurant App</Text>
+            <Text style={styles.text}>Nutrition App</Text>
             <Image style={styles.logo} source={{uri: 'https://freepngimg.com/thumb/food/4-2-food-png.png'}}/>
             <Button title="LOGIN" onPress={() => props.navigation.navigate('Menu')} />
         </View>
