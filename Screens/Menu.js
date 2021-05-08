@@ -5,62 +5,16 @@ import {
     responsiveFontSize
   } from "react-native-responsive-dimensions";
 import {StyleSheet, Text, View, Button, SafeAreaView, TouchableOpacity, SectionList, TextInput} from 'react-native';
-import items from '../MenuItems';
+import {queryChanged} from '../store/actions/actionTypes';
+import {useSelector, useDispatch} from 'react-redux';
 
 const Menu = props => {
 
-    const [query, setQuery] = useState('');
+    const dispatch = useDispatch();
 
-    const [displayedItems, setDisplayedItems] = useState(items);
+    const changeQuery = (query) => dispatch({type: queryChanged, query: query});
 
-    const updateQuery = (newQuery) => {
-        setQuery(newQuery);
-    };
-
-    useEffect(() => {
-        const lowerCaseQuery = query.toLowerCase();
-
-        const intermediateArray = [
-            {
-                key: "burgers",
-                title: "Burgers",
-                data: []
-            },
-            {
-                key: "pizzas",
-                title: "Pizzas",
-                data: []
-            },
-            {
-                key: "seafood",
-                title: "Seafood",
-                data: []
-            },
-            {
-                key: "desserts",
-                title: "Desserts",
-                data: []
-            },
-            {
-                key: "drinks",
-                title: "Drinks",
-                data: []
-            },
-        ];
-
-
-        let i;
-        for (i = 0; i < items.length; i++) {
-            items[i]['data'].forEach( (item) => {
-                if (item['name'].toLowerCase().includes(lowerCaseQuery)) {
-                    
-                    intermediateArray[i]['data'].push(item);
-                }
-            });
-        }
-
-        setDisplayedItems(intermediateArray);
-    }, [query]);
+    const displayedItems = useSelector(state => state.items.displayedItems);
 
     const renderItem = ({ item }) => 
         (<TouchableOpacity style={styles.row} onPress={() => props.navigation.navigate('FoodInfo', {id: item['id']})}>
@@ -85,7 +39,7 @@ const Menu = props => {
         <SafeAreaView style={styles.container}>
             
             <View style={styles.searchRow}>
-                <TextInput style={styles.input} onChangeText={ (newQuery) => updateQuery(newQuery) } placeholder="What are you craving?" />
+                <TextInput style={styles.input} value={useSelector(state => state.items.query)} onChangeText={ (newQuery) => changeQuery(newQuery) } placeholder="What are you craving?" />
             </View>
             
             <SectionList 
