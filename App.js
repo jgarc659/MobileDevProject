@@ -9,6 +9,16 @@ import Home from './Screens/Home';
 import Menu from './Screens/Menu';
 import FoodInfo from './Screens/FoodInfo';
 
+import {combineReducers, createStore} from 'redux';
+import {Provider} from 'react-redux';
+import itemsReducer from './store/reducers/itemsReducer';
+import {useSelector, useDispatch} from 'react-redux';
+import { programStartup } from './store/actions/actionTypes';
+
+const rootReducer = combineReducers({
+  items: itemsReducer
+});
+
 const Stack = createStackNavigator();
 
 const RestaurantAppStack = () => {
@@ -35,32 +45,45 @@ const RestaurantAppStack = () => {
 };
 
 const App = props => {
-  const [isLoaded, setLoaded] = useState(false);
-  const [assets] = useAssets([require('./assets/app-logo.png')]);
+  
+  const dispatch = useDispatch();
+
+  const startProgram = () => dispatch({type: programStartup});
 
   useEffect(() => {
     // Allow Splash screen to show for 3 seconds.
-    setTimeout((() => { setLoaded(true); }), 3000);
-    
+    setTimeout((() => { startProgram(); }), 3000); 
   }, []);
 
-  return (
-    <AnimatedSplash
-      translucent={true}
-      isLoaded={isLoaded}
-      logoImage={require("./assets/app-logo.png")}
-      backgroundColor={"blue"}
-      logoHeight={350}
-      logoWidth={350}
-    >
-      <NavigationContainer style={styles.container}>
-    
-        <RestaurantAppStack />
-    
-      </NavigationContainer>
+  const isLoaded = useSelector(state => state.items.isLoaded);
 
-    </AnimatedSplash>
+  return (
+      <AnimatedSplash
+        translucent={true}
+        isLoaded={isLoaded}
+        logoImage={require("./assets/app-logo.png")}
+        backgroundColor={"blue"}
+        logoHeight={350}
+        logoWidth={350}
+      >
+        <NavigationContainer style={styles.container}>
+      
+          <RestaurantAppStack />
+      
+        </NavigationContainer>
+
+      </AnimatedSplash>
  );
+}
+
+const AppWrapper = () => {
+  const store = createStore(rootReducer);
+
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -73,4 +96,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default AppWrapper;

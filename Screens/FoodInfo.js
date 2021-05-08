@@ -1,48 +1,31 @@
 import React, {useState} from 'react';
 import {responsiveFontSize} from "react-native-responsive-dimensions";
 import {StyleSheet, Text, View, SafeAreaView, Image} from 'react-native';
-import items from '../MenuItems';
+import {itemSelected} from '../store/actions/actionTypes';
+import {useSelector, useDispatch} from 'react-redux';
 
 const FoodInfo = props => {
 
     const {route} = props;
     const {id} = route.params;
-    const [displayedItem, setDisplayedItem] = useState({});
 
-   
-
-    const getItem = async () => {
-
-        let tempDisplayedItem = {};
- 
+    const dispatch = useDispatch();
+    dispatch({type: itemSelected, id: id});
     
-        await items.forEach(section => {
-            section['data'].forEach( (item) => {
-                if (item.id === id) {
-                    tempDisplayedItem = item;
-                }
-            });
-        });
-    
-        setDisplayedItem(tempDisplayedItem);
-
-    }
-
-    getItem();
-
+    const selectedItem = useSelector(state => state.items.selectedItem);
 
     return (
             <SafeAreaView style={styles.container}>
                 <View style={styles.centeredContent}>
-                    <Image style={styles.image} source={{uri: displayedItem['image']}}/>
-                    <Text style = {styles.name}>{displayedItem['name']}</Text>
+                    <Image style={styles.image} source={{uri: selectedItem['image']}}/>
+                    <Text style = {styles.name}>{selectedItem['name']}</Text>
                 </View>
                 <View style = {styles.description}>
-                  <Text style = {styles.text}>Calories: {displayedItem['calories']}</Text>
-                  <Text style = {styles.text}>Fat: {displayedItem['fat']} grams</Text>
-                  <Text style = {styles.text}>Carbs: {displayedItem['carbs']} grams</Text>
-                  <Text style = {styles.text}>Sugar: {displayedItem['sugar']} grams</Text>
-                  <Text style = {styles.text}>Sodium: {displayedItem['sodium']} grams</Text>
+                  <Text style = {styles.text}>Calories: {selectedItem['calories']}</Text>
+                  <Text style = {styles.text}>Fat: {selectedItem['fat']} grams</Text>
+                  <Text style = {styles.text}>Carbs: {selectedItem['carbs']} grams</Text>
+                  <Text style = {styles.text}>Sugar: {selectedItem['sugar']} grams</Text>
+                  <Text style = {styles.text}>Sodium: {selectedItem['sodium']} grams</Text>
                 </View>
             </SafeAreaView>
     );
