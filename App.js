@@ -1,19 +1,18 @@
-import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { StatusBar } from 'expo-status-bar';
+import React, { useEffect } from 'react';
+import { StyleSheet } from 'react-native';
 import AnimatedSplash from "react-native-animated-splash-screen";
-import { Asset, useAssets } from 'expo-asset';
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import 'react-native-gesture-handler';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+import { combineReducers, createStore } from 'redux';
+import FoodInfo from './Screens/FoodInfo';
 import Home from './Screens/Home';
 import Menu from './Screens/Menu';
-import FoodInfo from './Screens/FoodInfo';
-
-import {combineReducers, createStore} from 'redux';
-import {Provider} from 'react-redux';
-import itemsReducer from './store/reducers/itemsReducer';
-import {useSelector, useDispatch} from 'react-redux';
 import { programStartup } from './store/actions/actionTypes';
+import itemsReducer from './store/reducers/itemsReducer';
+
 
 const rootReducer = combineReducers({
   items: itemsReducer
@@ -47,7 +46,6 @@ const RestaurantAppStack = () => {
 const App = props => {
   
   const dispatch = useDispatch();
-
   const startProgram = () => dispatch({type: programStartup});
 
   useEffect(() => {
@@ -67,7 +65,7 @@ const App = props => {
         logoWidth={350}
       >
         <NavigationContainer style={styles.container}>
-      
+          <StatusBar style="auto" />
           <RestaurantAppStack />
       
         </NavigationContainer>
